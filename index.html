@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chanjae Song</title>
+<meta name="description" content="Chanjae Song, Ph.D. student at KAIST Graduate School of Data Science (Data Mining Lab).">
+<style>
+  :root {
+    --navy: #05185E;
+    --blue: #0A31C0;
+    --light: #9DB1FA;
+    --text: #494e52;
+    --muted: #9ba1a6;
+    --border: #f2f3f3;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0; color: var(--text); background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; line-height: 1.6;
+  }
+  a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--navy); }
+
+  /* masthead */
+  .masthead {
+    position: sticky; top: 0; z-index: 10; background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+  .masthead .inner {
+    max-width: 1100px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 40px;
+  }
+  .masthead .site-title { font-weight: 700; color: var(--navy); text-decoration: none; font-size: 17px; }
+  .masthead nav { display: flex; gap: 28px; flex-wrap: wrap; }
+  .masthead nav a { color: var(--navy); text-decoration: none; font-size: 15px; padding-bottom: 3px; border-bottom: 2px solid transparent; }
+  .masthead nav a:hover { border-bottom-color: var(--blue); }
+
+  /* layout */
+  .page { max-width: 1100px; margin: 0 auto; padding: 36px 24px 80px; display: grid; grid-template-columns: 220px 1fr; gap: 48px; }
+  .sidebar { position: sticky; top: 90px; align-self: start; font-size: 13px; }
+  .avatar {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 52px; font-weight: 600; letter-spacing: 1px;
+  }
+  .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+  .sidebar h2 { font-size: 20px; color: var(--navy); margin: 18px 0 2px; }
+  .sidebar .role { color: var(--text); margin: 0 0 16px; line-height: 1.5; }
+  .sidebar ul { list-style: none; padding: 0; margin: 0; }
+  .sidebar li { display: flex; align-items: center; gap: 10px; margin: 9px 0; }
+  .sidebar li svg { width: 14px; height: 14px; fill: var(--navy); flex-shrink: 0; }
+  .sidebar li a { color: var(--text); text-decoration: none; }
+  .sidebar li a:hover { color: var(--blue); }
+
+  /* content */
+  main section { margin-bottom: 44px; }
+  main h1 {
+    font-size: 22px; color: var(--navy); margin: 0 0 16px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--light);
+  }
+  main p { margin: 0 0 12px; }
+  .interests { margin: 14px 0 0; padding-left: 20px; }
+  .interests li { margin-bottom: 6px; }
+
+  /* news timeline */
+  .news { list-style: none; margin: 0; padding: 0; }
+  .news li { display: grid; grid-template-columns: 96px 1fr; gap: 18px; position: relative; padding-bottom: 14px; }
+  .news .date { color: var(--muted); font-size: 13px; font-weight: 600; padding-top: 2px; }
+  .news .item { position: relative; padding-left: 20px; border-left: 2px solid var(--border); }
+  .news .item::before {
+    content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px;
+    border-radius: 50%; background: #fff; border: 2px solid var(--blue);
+  }
+
+  /* entries */
+  .entry { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin-bottom: 18px; }
+  .entry .title { font-weight: 600; color: var(--navy); }
+  .entry .when { color: var(--muted); font-size: 14px; white-space: nowrap; }
+  .entry .sub { grid-column: 1 / -1; font-size: 15px; }
+
+  /* publications */
+  .pub-group { font-size: 15px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin: 22px 0 10px; }
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  .pubs li { display: grid; grid-template-columns: 128px 1fr; gap: 16px; margin-bottom: 16px; }
+  .venue {
+    align-self: start; text-align: center; font-size: 12px; font-weight: 700; color: #fff;
+    background: var(--navy); border-radius: 4px; padding: 3px 6px; line-height: 1.4;
+    white-space: nowrap;
+  }
+  .pubs .ptitle { font-weight: 600; color: #222; }
+  .pubs .authors { font-size: 14.5px; }
+  .pubs .authors b { color: var(--navy); }
+  .pubs .meta { font-size: 14px; font-style: italic; }
+  .tag { font-style: normal; font-weight: 600; color: var(--blue); }
+  .note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 24px; border-top: 1px solid var(--border); }
+
+  @media (max-width: 820px) {
+    .masthead .inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .masthead nav { gap: 16px; }
+    .page { grid-template-columns: 1fr; gap: 24px; }
+    .sidebar { position: static; display: grid; grid-template-columns: 110px 1fr; gap: 0 18px; }
+    .avatar { width: 110px; height: 110px; font-size: 36px; grid-row: span 3; }
+    .sidebar h2 { margin-top: 4px; }
+    .news li, .pubs li { grid-template-columns: 1fr; gap: 4px; }
+    .venue { justify-self: start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <a class="site-title" href="#about">Chanjae Song</a>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#news">News</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#publications">Publications</a>
+      <a href="#awards">Awards</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page">
+  <aside class="sidebar">
+    <div class="avatar">CS</div>
+    <h2>Chanjae Song</h2>
+    <p class="role">Ph.D. Student at KAIST<br>Data Mining Lab</p>
+    <ul>
+      <li><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Daejeon, Korea</li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zM5 13.2v4L12 21l7-3.8v-4L12 17l-7-3.8z"/></svg><a href="https://www.kaistdmlab.org/">KAIST Data Mining Lab</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg><a href="https://github.com/cjsong45">GitHub</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9h3v10zM6.5 7.7a1.8 1.8 0 1 1 0-3.5 1.8 1.8 0 0 1 0 3.5zM19 19h-3v-4.9c0-1.2 0-2.7-1.6-2.7S12.5 12.7 12.5 14v5h-3V9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19z"/></svg><a href="https://www.linkedin.com/in/chanjae-song-b440b2355">LinkedIn</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h1>About Me</h1>
+      <p>Hi! I'm Chanjae Song, a Ph.D. student at the <a href="https://gsds.kaist.ac.kr/">Graduate School of Data Science</a>, <a href="https://www.kaist.ac.kr/">KAIST</a>, where I am advised by Professor Jae-Gil Lee in the <a href="https://www.kaistdmlab.org/">Data Mining Lab</a>. I am also a research student at the SuperIntelligence Lab, LG AI Research. I received my M.S. in Industrial and Systems Engineering from KAIST under the supervision of Professor Mun Yong Yi, and my B.S. in Industrial Management Engineering from Korea University.</p>
+      <p>My research focuses on:</p>
+      <ul class="interests">
+        <li><b>Grounded multimodal interpretability</b>: revealing which evidence a multimodal model actually relies on, so its outputs can be traced, checked, and corrected.</li>
+        <li><b>Robust multimodal learning</b>: keeping multimodal models reliable when inputs are missing, noisy, or uncertain, by improving the data and supervision they learn from rather than scaling the model.</li>
+      </ul>
+    </section>
+
+    <section id="news">
+      <h1>News</h1>
+      <ul class="news">
+        <li><span class="date">Sep 2026</span><div class="item">Joined the SuperIntelligence Lab at <b>LG AI Research</b> as a research student.</div></li>
+        <li><span class="date">2026</span><div class="item">Our paper on structure-aware evaluation metrics for WSI feature extractors (SAM-Cluster / SAM-LP) was accepted to <b>MICCAI 2026</b>.</div></li>
+        <li><span class="date">2026</span><div class="item">Our paper on sample-centric adversarial masking for missing modalities was published in <b>Neurocomputing</b>.</div></li>
+        <li><span class="date">Mar 2026</span><div class="item">Started my Ph.D. at the KAIST Graduate School of Data Science (Data Mining Lab).</div></li>
+        <li><span class="date">Dec 2025</span><div class="item">Received the Excellence Award at IE Frontier, KAIST.</div></li>
+        <li><span class="date">2025</span><div class="item">Our 15-minute city evaluation framework was presented as an <b>oral</b> at <b>ACM SIGSPATIAL 2025</b>.</div></li>
+        <li><span class="date">Jul 2025</span><div class="item">Received the Best Presentation Award at the Korea Computer Congress (KCC 2025).</div></li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h1>Education</h1>
+      <div class="entry">
+        <span class="title">Korea Advanced Institute of Science and Technology (KAIST)</span><span class="when">Mar 2026 – Present</span>
+        <span class="sub">Ph.D. Student, Graduate School of Data Science · Advisor: Jae-Gil Lee</span>
+      </div>
+      <div class="entry">
+        <span class="title">Korea Advanced Institute of Science and Technology (KAIST)</span><span class="when">Mar 2024 – Feb 2026</span>
+        <span class="sub">M.S. in Industrial and Systems Engineering · Advisor: Mun Yong Yi</span>
+      </div>
+      <div class="entry">
+        <span class="title">Korea University</span><span class="when">Mar 2018 – Feb 2024</span>
+        <span class="sub">B.S. in Industrial Management Engineering · Advisor: Rohae Myung</span>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h1>Experience</h1>
+      <div class="entry">
+        <span class="title">SuperIntelligence Lab, LG AI Research</span><span class="when">Sep 2026 – Present</span>
+        <span class="sub">Research Student. Diagnosing why vision-language models fail at reasoning over visually rich, multi-page documents, using data-centric and interpretability analysis to design a fix.</span>
+      </div>
+      <div class="entry">
+        <span class="title">Ergonomics Lab, Korea University</span><span class="when">Sep 2022 – Dec 2023</span>
+        <span class="sub">Research Student. Built ACT-R cognitive models that simulate human task-switching behavior and mental workload to predict multitasking performance.</span>
+      </div>
+      <div class="entry">
+        <span class="title">Engine Quality Assurance Team, HD Hyundai Infracore</span><span class="when">Jun 2023 – Jul 2023</span>
+        <span class="sub">Quality Assurance Intern. Applied multivariate statistical analysis to engine production data to diagnose defect causes and assess mass-production readiness.</span>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h1>Publications</h1>
+      <p class="note">* denotes equal contribution.</p>
+
+      <div class="pub-group">Conference &amp; Journal</div>
+      <ul class="pubs">
+        <li><span class="venue">Neurocomputing</span><div>
+          <div class="ptitle">Sample-Centric Adversarial Masking for Robust Multimodal Learning under Missing Modalities</div>
+          <div class="authors">Sol Lee, Sungrae Hong, <b>Chanjae Song</b>, Jisu Shin, Jiwon Jeong, Mun Yong Yi</div>
+          <div class="meta">Neurocomputing, 2026</div>
+        </div></li>
+        <li><span class="venue">MICCAI 2026</span><div>
+          <div class="ptitle">SAM-Cluster and SAM-LP: Structure-Aware Evaluation Metrics for Selecting WSI Feature Extractors without MIL Training</div>
+          <div class="authors">Juhyeon Kim, Paul SMX, <b>Chanjae Song</b>, Mun Yong Yi</div>
+          <div class="meta">International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI), 2026</div>
+        </div></li>
+        <li><span class="venue">SIGSPATIAL 2025</span><div>
+          <div class="ptitle">A Novel Evaluation Framework for 15-Minute City Using Satellite Imagery</div>
+          <div class="authors"><b>Chanjae Song*</b>, Seongyeub Chu*, Jongwoo Kim*, Mun Yong Yi</div>
+          <div class="meta">ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems, 2025 <span class="tag">(Oral)</span> · <a href="https://github.com/cjsong45/GeoTwin_MIL">Code</a></div>
+        </div></li>
+        <li><span class="venue">WACV 2025</span><div>
+          <div class="ptitle">Uncertainty-based Data-wise Label Smoothing for Calibrating Multiple Instance Learning in Histopathology Image Classification</div>
+          <div class="authors">Hyeongmin Park, Sungrae Hong, <b>Chanjae Song</b>, Jongwoo Kim, Mun Yong Yi</div>
+          <div class="meta">IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2025 <span class="tag">(Oral)</span> · <a href="https://openaccess.thecvf.com/content/WACV2025/html/Park_Uncertainty-Based_Data-Wise_Label_Smoothing_for_Calibrating_Multiple_Instance_Learning_in_WACV_2025_paper.html">Paper</a></div>
+        </div></li>
+      </ul>
+
+      <div class="pub-group">Workshop &amp; Domestic</div>
+      <ul class="pubs">
+        <li><span class="venue">MSB EMERGE</span><div>
+          <div class="ptitle">Priority-Aware Clinical Pathology Hierarchy Training for Multiple Instance Learning</div>
+          <div class="authors">Sungrae Hong, Kyungeun Kim, Juhyeon Kim, Sol Lee, Jisu Shin, <b>Chanjae Song</b>, Mun Yong Yi</div>
+          <div class="meta">MICCAI Student Board Workshop (MSB EMERGE), 2025 <span class="tag">(Best Presentation Award)</span> · <a href="https://arxiv.org/abs/2507.20469">arXiv</a></div>
+        </div></li>
+        <li><span class="venue">AAAI-W 2025</span><div>
+          <div class="ptitle">TireDiff: A Diffusion-based Tire Footprint Image Generation Framework for High-fidelity Prototyping</div>
+          <div class="authors">Sol Lee, Jisu Shin, Sungrae Hong, <b>Chanjae Song</b>, Youngbin You, Jeongheon Park, Jungsoo Oh, Mun Yong Yi</div>
+          <div class="meta">AAAI Workshop on AI to Accelerate Science and Engineering (AI2ASE), 2025</div>
+        </div></li>
+        <li><span class="venue">KCC 2025</span><div>
+          <div class="ptitle">Metadata-Aware Multimodal MIL with Reliable Calibration for Histopathology Diagnosis</div>
+          <div class="authors"><b>Chanjae Song</b>, Sungrae Hong, Juhyeon Kim, Minkyu Jeong, Mun Yong Yi</div>
+          <div class="meta">Korea Computer Congress (KCC), 2025 <span class="tag">(Best Presentation Award)</span></div>
+        </div></li>
+        <li><span class="venue">KCC 2025</span><div>
+          <div class="ptitle">Enhancing Time-Series Forecasting via Integrating Stationary Transformation and Diffusion-Based Generation</div>
+          <div class="authors">Harim Jeong, <b>Chanjae Song</b>, Jisu Shin, Mun Yong Yi</div>
+          <div class="meta">Korea Computer Congress (KCC), 2025 <span class="tag">(Best Presentation Award)</span></div>
+        </div></li>
+      </ul>
+    </section>
+
+    <section id="awards">
+      <h1>Awards &amp; Honors</h1>
+      <div class="entry"><span class="title">Excellence Award, IE Frontier, KAIST</span><span class="when">Dec 2025</span></div>
+      <div class="entry"><span class="title">Best Presentation Award, Korea Computer Congress</span><span class="when">Jul 2025</span></div>
+      <div class="entry"><span class="title">Excellence Award, Capstone Design, Korea University</span><span class="when">Dec 2023</span></div>
+      <div class="entry"><span class="title">Chair's Award, Journal of Intellectual Property Education &amp; Research</span><span class="when">Jun 2023</span></div>
+      <div class="entry"><span class="title">Grand Award, FIELD Competition, Korean Institute of Industrial Engineers</span><span class="when">Aug 2019</span></div>
+    </section>
+  </main>
+</div>
+
+<footer>© 2026 Chanjae Song · Last updated Nov 2026</footer>
+</body>
+</html>
